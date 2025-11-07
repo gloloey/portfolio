@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/BaseLayout.astro";
+import Nav from "../components/Nav.astro";
+import Footer from "../components/Footer.astro";
+import Section from "../components/Section.astro";
+import ProjectCard from "../components/ProjectCard.astro";
+import ExperienceItem from "../components/ExperienceItem.astro";
+import { site } from "../data/site";
+import { projects } from "../data/projects";
+import { experience } from "../data/experience";
+import { skills } from "../data/skills";
+---
+<Base title="Home" description="Portfolio of Gabriel Loloey">
+  <Nav />
+
+  <!-- Hero -->
+  <header class="pt-8 md:pt-14 pb-8">
+    <h1 class="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+      Hi, I’m <span class="text-sky-600 dark:text-sky-400">Gabriel Loloey</span>.
+    </h1>
+    <p class="mt-3 text-lg text-slate-600 dark:text-slate-300 max-w-2xl">
+      I’m a Mathematics with Computer Science student who loves building useful things. I value teamwork and clear communication.
+    </p>
+
+    <div class="mt-6 flex flex-wrap gap-3 text-sm">
+      <a class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700" href="/Gabriel_Loloey_Resume.pdf">Download Resume</a>
+      <a class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700" href="#contact">Contact</a>
+    </div>
+  </header>
+
+  <!-- Projects -->
+  <Section id="projects" title="Projects" subtitle="Selected work I’m proud of">
+    <div class="grid md:grid-cols-2 gap-5">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </Section>
+
+  <!-- Experience -->
+  <Section id="experience" title="Experience" subtitle="Internships, programs, and apprenticeships">
+    <div class="space-y-4">
+      {experience.map((e) => <ExperienceItem item={e} />)}
+    </div>
+  </Section>
+
+  <!-- Skills -->
+  <Section id="skills" title="Skills" subtitle="Technologies I use and speak">
+    <div class="grid md:grid-cols-3 gap-6">
+      <div>
+        <h3 class="font-semibold">Programming</h3>
+        <ul class="mt-2 text-sm space-y-1">
+          {skills.programming.map((s) => <li>• {s}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold">Tools</h3>
+        <ul class="mt-2 text-sm space-y-1">
+          {skills.tools.map((s) => <li>• {s}</li>)}
+        </ul>
+      </div>
+      <div>
+        <h3 class="font-semibold">Languages</h3>
+        <ul class="mt-2 text-sm space-y-1">
+          {skills.languages.map((s) => <li>• {s}</li>)}
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Contact -->
+  <Section id="contact" title="Get in touch" subtitle="I’m open to internships and collaborations">
+    <div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-6">
+      <p class="text-slate-600 dark:text-slate-300">
+        The fastest way to reach me is by email. I read every message.
+      </p>
+      <div class="mt-4 flex gap-4">
+        <a class="px-4 py-2 rounded-xl bg-sky-600 text-white hover:opacity-90" href="mailto:{site.email}">{site.email}</a>
+        <a class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700" href={site.social.github} target="_blank">GitHub</a>
+        <a class="px-4 py-2 rounded-xl border border-slate-200 dark:border-slate-700" href={site.social.linkedin} target="_blank">LinkedIn</a>
+      </div>
+    </div>
+  </Section>
+
+  <Footer />
+</Base>
+

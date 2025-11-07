@@ -1,0 +1,60 @@
+---
+const { item } = Astro.props;
+---
+
+<div class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5">
+  <div class="flex flex-wrap items-baseline justify-between gap-3">
+    <div>
+      <h3 class="font-semibold">{item.org}</h3>
+      <p class="text-sm text-slate-600 dark:text-slate-300">
+        {item.role}{item.location ? ` • ${item.location}` : ''}
+      </p>
+    </div>
+    <div class="text-xs text-slate-500">{item.date}</div>
+  </div>
+
+  <ul class="mt-3 list-disc pl-5 space-y-2 text-sm">
+    {item.bullets.map((b) => <li>{b}</li>)}
+  </ul>
+
+  {item.video && (
+    <div class="mt-4">
+      <video
+        class="w-full rounded-lg border border-slate-200 dark:border-slate-800"
+        src={item.video}
+        controls
+        preload="metadata"
+        playsinline
+      >
+        Your browser does not support HTML5 video.
+      </video>
+    </div>
+  )}
+
+  {(item.links?.github || item.video) && (
+    <div class="mt-4 flex flex-wrap gap-4 text-sm">
+      {item.links?.github && (
+        <a
+          href={item.links.github}
+          target="_blank"
+          rel="noreferrer"
+          class="underline"
+          aria-label="Open GitHub repository for Apprenticeship"
+        >
+          GitHub repository ↗
+        </a>
+      )}
+      {item.video && (
+        <a
+          href={item.video}
+          target="_blank"
+          rel="noreferrer"
+          class="underline"
+          aria-label="Open video in a new tab"
+        >
+          Open video ↗
+        </a>
+      )}
+    </div>
+  )}
+</div>

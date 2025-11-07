@@ -1,0 +1,48 @@
+---
+const { project } = Astro.props;
+---
+
+<article class="rounded-2xl border border-slate-200 dark:border-slate-800 p-5 hover:shadow-md transition">
+  <div class="flex items-center justify-between mb-2">
+    <h3 class="text-lg font-semibold">{project.name}</h3>
+    <span class="text-xs text-slate-500">{project.timeframe}</span>
+  </div>
+
+  {/* Show video if provided */}
+  {project.video && (
+    <video
+      class="mb-3 w-full rounded-lg border border-slate-200 dark:border-slate-800"
+      src={project.video}
+      controls
+      preload="metadata"
+      playsinline
+    >
+      Your browser does not support HTML5 video.
+    </video>
+  )}
+
+  {/* Optional: image fallback if you later add project.image */}
+  {!project.video && project.image && (
+    <img
+      src={project.image}
+      alt={`${project.name} screenshot`}
+      class="mb-3 rounded-lg border border-slate-200 dark:border-slate-800"
+      loading="lazy"
+      decoding="async"
+    />
+  )}
+
+  <p class="text-sm text-slate-600 dark:text-slate-300 mb-3">{project.description}</p>
+
+  <div class="flex flex-wrap gap-2 mb-3">
+    {project.tags.map((t) => (
+      <span class="text-xs bg-slate-100 dark:bg-slate-800 rounded-md px-2 py-1">{t}</span>
+    ))}
+  </div>
+
+  <div class="flex gap-4 text-sm">
+    {project.links?.demo && <a class="underline" href={project.links.demo} target="_blank" rel="noreferrer">Demo</a>}
+    {project.links?.github && <a class="underline" href={project.links.github} target="_blank" rel="noreferrer">GitHub</a>}
+    {project.video && <a class="underline" href={project.video} target="_blank" rel="noreferrer">Watch demo</a>}
+  </div>
+</article>
